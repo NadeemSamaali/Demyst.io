@@ -58,15 +58,26 @@ def predict_class(sentence) :
         return_list.append({'intent' : classes[r[0]], 'probability' : str(r[1])})
     return return_list
 
+# Function getting the tag with highest likely hood from a sentence
+def get_tag(sentence) :
+    prediction = predict_class(sentence)
+    return prediction[0]#['intent']
+
+# Fucntion printing a random response based on the inputted tag
+def get_response(tag) :
+    #print(tag)
+    class_type = tag['intent']
+    responses = intents['intents'][classes.index(class_type)]['responses']
+    if float(tag['probability']) >= 0.9 :
+        return responses[random.randint(0, len(responses)-1)]
+    else :
+        return "I'm not sure I understand what you're saying ..."
+
 # Chatbot
 while True :
     sentence = input('# ')
-    prediction = predict_class(sentence)
-    tag = prediction[0]['intent']
-    for intent in intents['intents'] :
-        if intent['tag'] == tag :
-            responses = intent['responses']
-    print(f'> {responses[random.randint(0, len(responses) - 1)]}')
-    continue
-
+    tag = get_tag(sentence)
+    response = get_response(tag)
+    print(f"> {response}")
+        
     
