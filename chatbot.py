@@ -1,3 +1,7 @@
+import os
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1' 
+
 import random
 import json
 import pickle
@@ -5,9 +9,9 @@ import numpy as np
 
 # Nltk setup
 import nltk
-nltk.download('punkt')
+nltk.download('punkt', quiet = True)
 from nltk.stem import WordNetLemmatizer
-nltk.download('wordnet')
+nltk.download('wordnet', quiet = True)
 
 # Keras setup
 from keras.src.saving.saving_api import load_model
@@ -45,7 +49,7 @@ def bag_of_words(sentence):
 # Function to predict the class of a sentence
 def predict_class(sentence) :
     bow = bag_of_words(sentence)
-    res = model.predict(np.array([bow]))[0]
+    res = model.predict(np.array([bow]), verbose = None)[0]
     percent_error = 0.25
     results = [[i,r] for i,r in enumerate(res) if r > percent_error]
     results.sort(key = lambda x : x[1], reverse = True)
@@ -54,6 +58,7 @@ def predict_class(sentence) :
         return_list.append({'intent' : classes[r[0]], 'probability' : str(r[1])})
     return return_list
 
+# Chatbot
 while True :
     sentence = input('# ')
     prediction = predict_class(sentence)

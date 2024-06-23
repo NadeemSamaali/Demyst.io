@@ -1,19 +1,94 @@
 {
-    "intents" : [
+    "intents": [
         {
-            "tag" : "greetings",
-            "patterns" : ["hi","hey", "hello", "good day", "good morning", "howdy", "what's up", "greetings", "how are you doing"],
-            "responses" : ["Hi !", "Hello !", "How can I help you today?"]
-        } ,
+            "tag": "greetings",
+            "patterns": [
+                "hi",
+                "hey",
+                "hello",
+                "good day",
+                "good morning",
+                "howdy",
+                "what's up",
+                "greetings",
+                "how are you doing",
+                "Good to see you"
+            ],
+            "responses": [
+                "Hi !",
+                "Hello !",
+                "How can I help you today?"
+            ]
+        },
         {
-            "tag" : "goodbye",
-            "patterns" : ["bye", "goodbye", "cya", "gotta go", "see you", "imma go", "peace out", "i'm out"],
-            "responses" : ["Good bye !", "Thanks for reaching out !", "Have a nice day !", "See you again soon !"]
-        } ,
+            "tag": "goodbye",
+            "patterns": [
+                "bye",
+                "goodbye",
+                "cya",
+                "gotta go",
+                "see you",
+                "imma go",
+                "peace out",
+                "i'm out",
+                "see you later",
+                "later",
+                "see you later alligator"
+            ],
+            "responses": [
+                "Good bye !",
+                "Thanks for reaching out !",
+                "Have a nice day !",
+                "See you again soon !"
+            ]
+        },
         {
-            "tag" : "thanks", 
-            "patterns" : ["Thanks", "Thank you", "This helps a lot !"],
-            "responses" : ["You're welcome !", "Let me know if you need anything else !"]
+            "tag": "thanks",
+            "patterns": [
+                "Thanks",
+                "Thank you",
+                "This helps a lot !",
+                "I'm grateful for your help",
+                "You are so helpful",
+                "All my gratitude",
+                "I appreciate it"
+            ],
+            "responses": [
+                "You're welcome !",
+                "Let me know if you need anything else !"
+            ]
+        },
+        {
+            "tag" : "self-indentity",
+            "patterns" : [
+                "Who are  you?", 
+                "What's your name", 
+                "What are you?", 
+                "How can you help me", 
+                "What's your indentity", 
+                "What do you do?"],
+            "responses" : [
+                "My name is Demystio. I'm an AI chatbot assistant for students !",
+                "My name is Demystio, I can help you organize your student life or answer questions !",
+                "I'm Demsytio, I can help make your student workload more manageable"
+            ]
+        },
+        {
+            "tag" : "help",
+            "patterns" : [
+                "I don't know how to do this",
+                "What should I do ?",
+                "What can you do ?",
+                "I need help",
+                "How can you help me?",
+                "What are your functionalities?",
+                "What are your features?",
+                "Where do I start?"
+            ],
+            "responses" : [
+                "Here's a list of things I can do to get you started : ",
+                "Here's how I can help you : "
+            ]
         }
     ]
 }
