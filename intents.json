@@ -89,6 +89,18 @@
                 "Here's a list of things I can do to get you started : ",
                 "Here's how I can help you : "
             ]
+        },
+        {
+            "tag" : "arithmetics",
+            "patterns" : [
+                "What is equal to?",
+                "What's the result of ?",
+                "What does output ?",
+                "Can you calculate ?",
+                "Find the answer to this expression",
+                "Solve the following equations"
+            ],
+            "responses" : ["Here's the result of your expression !", "I can gladly calculate that !", "Here you go !"]
         }
     ]
 }
