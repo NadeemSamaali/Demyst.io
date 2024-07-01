@@ -6,6 +6,8 @@ import random
 import json
 import pickle
 import numpy as np
+from Linspace.arithmetics import parse_and_evaluate
+import re
 
 # Nltk setup
 import nltk
@@ -28,7 +30,7 @@ words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
 
 # Loading model
-model = load_model('chatbot_model.h5')
+model = load_model('chatbot_model.h5', compile = False)
 
 # Function to clean up sentences
 def clean_up_sentence(sentence) :
@@ -68,7 +70,7 @@ def get_response(tag) :
     #print(tag)
     class_type = tag['intent']
     responses = intents['intents'][classes.index(class_type)]['responses']
-    if float(tag['probability']) >= 0.9 :
+    if float(tag['probability']) >= 0.8 :
         return responses[random.randint(0, len(responses)-1)]
     else :
         return "I'm not sure I understand what you're saying ..."
@@ -77,7 +79,19 @@ def get_response(tag) :
 while True :
     sentence = input('# ')
     tag = get_tag(sentence)
-    response = get_response(tag)
-    print(f"> {response}")
+    intent = tag['intent']
+    
+    # Performing arithmetical expressions
+    if intent == 'arithmetics' :
+        matches = [sentence[i] for i in range(len(sentence)) if sentence[i] in ['0','1','2','3','4','5','6','7','8','9','(',')','+','-','*','/']]
+        if len(matches) == 0 :
+            raise ValueError("No arithmetical expression found")
+        expression = "".join(matches)
+        result = parse_and_evaluate(expression)
+        print(f'> {get_response(tag)}', end="")
+        print(f' The result of {expression} is {result} !')
+    else :
+        response = get_response(tag)
+        print(f"> {response}")
         
     

@@ -35,7 +35,7 @@ for intent in intents['intents'] :
         documents.append((word_list, intent['tag']))
         
 # Lemmatizing the tokens in the words list
-words = [lemmatizer.lemmatize(word) for word in words if word not in to_ignore]
+words = [lemmatizer.lemmatize(word.lower()) for word in words if word not in to_ignore]
 words = sorted(set(words))
 
 # Serializing the words and classes list into pickle files
