@@ -3,7 +3,7 @@ import re
 class Tokenizer :
     # Splitting the expression as a list
     def __init__(self, expression : str) :
-        self.tokens = re.findall(r'\d+|[+*/()-]', expression)
+        self.tokens = re.findall(r'\d+|[+*/()-^]', expression)
         self.current_index = 0
     # Returnts token at current_index and increments the current index by a factor of 1
     def next_token(self) :
@@ -42,8 +42,14 @@ class Tree :
     
     # Handling multiplication and division
     def term(self) :
-        node = self.factor()
+        node = self.expon()
         while self.tokenizer.current_index < len(self.tokenizer.tokens) and self.tokenizer.peek_token() in ['*','/'] :
+            node = Node(self.tokenizer.next_token(), node, self.expon())
+        return node
+    
+    def expon(self) :
+        node = self.factor()
+        while self.tokenizer.current_index < len(self.tokenizer.tokens) and self.tokenizer.peek_token() in ['^'] :
             node = Node(self.tokenizer.next_token(), node, self.factor())
         return node
     
@@ -72,6 +78,8 @@ def evaluate(node) :
         return evaluate(node.left) * evaluate(node.right)
     elif node.value == '/' :
         return evaluate(node.left) / evaluate(node.right)
+    elif node.value == '^' :
+        return evaluate(node.left) ** evaluate(node.right)
     else :
         raise ValueError(f'The following token is invalid {node.value}')
 
@@ -81,4 +89,3 @@ def parse_and_evaluate(expression : str) :
     tree = Tree(equation)
     parse_tree = tree.parse()
     return evaluate(parse_tree)
-
