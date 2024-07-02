@@ -11,9 +11,9 @@ import re
 
 # Nltk setup
 import nltk
-nltk.download('punkt', quiet = True)
+#nltk.download('punkt', quiet = True)
 from nltk.stem import WordNetLemmatizer
-nltk.download('wordnet', quiet = True)
+#nltk.download('wordnet', quiet = True)
 
 # Keras setup
 from keras.src.saving.saving_api import load_model
@@ -30,6 +30,7 @@ words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
 
 # Loading model
+print(':: Loading the chatbot model ::')
 model = load_model('chatbot_model.h5', compile = False)
 
 # Function to clean up sentences
@@ -74,24 +75,32 @@ def get_response(tag) :
         return responses[random.randint(0, len(responses)-1)]
     else :
         return "I'm not sure I understand what you're saying ..."
-
-# Chatbot
-while True :
-    sentence = input('# ')
-    tag = get_tag(sentence)
+    
+# Function running the chatbot    
+def run_chatbot(user_input : str) :
+    tag = get_tag(user_input)
     intent = tag['intent']
     
     # Performing arithmetical expressions
     if intent == 'arithmetics' :
-        matches = [sentence[i] for i in range(len(sentence)) if sentence[i] in ['0','1','2','3','4','5','6','7','8','9','(',')','+','-','*','/']]
+        matches = [user_input[i] for i in range(len(user_input)) if user_input[i] in ['0','1','2','3','4','5','6','7','8','9','(',')','+','-','*','/']]
         if len(matches) == 0 :
             raise ValueError("No arithmetical expression found")
         expression = "".join(matches)
         result = parse_and_evaluate(expression)
-        print(f'> {get_response(tag)}', end="")
-        print(f' The result of {expression} is {result} !')
+        return f'> {get_response(tag)} The result of {expression} is {result} !'
+    # Other interactions with chatbot
     else :
         response = get_response(tag)
-        print(f"> {response}")
-        
+        return f"> {response}"
+
+# Main loop        
+if __name__ == "__main__" :
     
+    try : 
+        while True : 
+            user_input = input('# ')
+            response = run_chatbot(user_input)
+            print(response)
+    except ValueError as e :
+        print(f'# ERROR : {e}')
