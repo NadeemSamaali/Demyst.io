@@ -18,7 +18,7 @@ from keras.src.optimizers import SGD
 lemmatizer = WordNetLemmatizer()
 
 # Load json file
-with open('intents.json') as file :
+with open('assets/intents.json') as file :
     intents = json.load(file)
 
 # Unpacking data into tokens
@@ -39,8 +39,8 @@ words = [lemmatizer.lemmatize(word.lower()) for word in words if word not in to_
 words = sorted(set(words))
 
 # Serializing the words and classes list into pickle files
-pickle.dump(words, open('words.pkl', 'wb'))
-pickle.dump(classes, open('classes.pkl', 'wb'))
+pickle.dump(words, open('assets/words.pkl', 'wb'))
+pickle.dump(classes, open('assets/classes.pkl', 'wb'))
 
 # Initializing training data
 training = []
@@ -79,5 +79,5 @@ model.compile(loss='categorical_crossentropy', optimizer = sgd, metrics=['accura
 
 # Training the model
 model.fit(train_x, train_y, epochs=200, batch_size=5, verbose=1)
-model.save('chatbot_model.h5')
+model.save('assets/chatbot_model.h5')
 print('Done')

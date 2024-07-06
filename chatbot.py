@@ -6,7 +6,7 @@ import random
 import json
 import pickle
 import numpy as np
-from Linspace.arithmetics import parse_and_evaluate
+from features.linspace.arithmetics import parse_and_evaluate
 import re
 
 # Nltk setup
@@ -22,16 +22,16 @@ from keras.src.saving.saving_api import load_model
 lemmatizer = WordNetLemmatizer()
 
 # Loading intents json file
-with open('intents.json') as file :
+with open('assets/intents.json') as file :
     intents = json.load(file)
     
 # Loading pickle files
-words = pickle.load(open('words.pkl', 'rb'))
-classes = pickle.load(open('classes.pkl', 'rb'))
+words = pickle.load(open('assets/words.pkl', 'rb'))
+classes = pickle.load(open('assets/classes.pkl', 'rb'))
 
 # Loading model
 print(':: Loading the chatbot model ::')
-model = load_model('chatbot_model.h5', compile = False)
+model = load_model('assets/chatbot_model.h5', compile = False)
 
 # Function to clean up sentences
 def clean_up_sentence(sentence) :
