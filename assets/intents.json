@@ -101,6 +101,24 @@
                 "Solve the following equations"
             ],
             "responses" : ["Here's the result of your expression !", "I can gladly calculate that !", "Here you go !"]
+        },
+        {
+            "tag" : "internet_search",
+            "patterns" : [
+                "Can you tell me about ?",
+                "Can you find this information for me ?",
+                "What is the history of ?",
+                "How does work ?",
+                "Talk to me about",
+                "What is ?"
+            ],
+            "reponses" : [
+                "Hmm ... Let me think about that !",
+                "Let me do a bit of research, I'll get back to you !",
+                "That's an interesting question ! Let me think ...",
+                "I see what you mean ! I'll look it up quickly ...",
+                "Good question ! I'll get back to you shortly ..."
+            ]
         }
     ]
 }
