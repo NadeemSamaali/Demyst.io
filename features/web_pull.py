@@ -1,11 +1,30 @@
+import json
 from bs4 import BeautifulSoup
 import requests
-import urllib
-from features.summarize import get_summary
+from summarize import get_summary
+
+# TO BUILD : Function to clean up the search sentence into keywords
+def cleanup_search_sentence(search_sentence : str) -> str :
+    # Loading the intents json file into a dictionary
+    with open('assets/intents.json') as file :
+        intents = json.load(file)
+        
+    # Extracting non-useful words in search sentence based on the intents pattern
+    patterns_internet_search = intents['intents'][6]['patterns']
+    patterns_internet_search = [pattern.lower() for pattern in patterns_internet_search]
+    to_ignore = []
+    for pattern in patterns_internet_search :
+        to_ignore += pattern.split()
+    to_ignore = list(set(to_ignore))
+    to_ignore.remove('history')
+    
+    # Cleaning up the search sentence
+    search_sentence = [word.lower() for word in search_sentence.split() if word.lower() not in to_ignore]
+    return " ".join(search_sentence)
 
 # Function finding most relevant webpage url based on keywords
 def get_url(search_sentence : str, domain = None) :
-    keywords_split = search_sentence.lower().split()
+    keywords_split = cleanup_search_sentence(search_sentence).lower().split()
     search_query = "+".join(keywords_split)
     
     # Adds website name to search query if domain_restriction is given
@@ -75,6 +94,3 @@ def summarize_from_web(search_sentence : str, domain=None) :
     text = get_text(url)
     summary = get_summary(text)
     return summary
-
-# output_text = summarize_from_web('Meme culture in the 21st century', domain='wikipedia')
-# print(output_text)
