@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import urllib
-from summarize import get_summary
+from features.summarize import get_summary
 
 # Function finding most relevant webpage url based on keywords
 def get_url(search_sentence : str, domain = None) :
@@ -73,8 +73,8 @@ def get_text(url : str) -> str :
 def summarize_from_web(search_sentence : str, domain=None) :
     url = get_url(search_sentence, domain)
     text = get_text(url)
-    summary = get_summary(text, 6)
+    summary = get_summary(text)
     return summary
 
-output_text = summarize_from_web('Meme culture in the 21st century', domain='wikipedia')
-print(output_text)
+# output_text = summarize_from_web('Meme culture in the 21st century', domain='wikipedia')
+# print(output_text)
