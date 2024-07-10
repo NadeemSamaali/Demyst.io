@@ -98,7 +98,7 @@
                 "What does output ?",
                 "Can you calculate ?",
                 "Find the answer to this expression",
-                "Solve the following equations"
+                "Solve the following equations",
             ],
             "responses" : ["Here's the result of your expression !", "I can gladly calculate that !", "Here you go !"]
         },
@@ -109,8 +109,7 @@
                 "Can you find this information for me ?",
                 "What is the history of ?",
                 "How does work ?",
-                "Talk to me about",
-                "What is ?"
+                "Talk to me about"
             ],
             "responses" : [
                 "Hmm ... Let me think about that !",
