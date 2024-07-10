@@ -1,7 +1,11 @@
 import json
 from bs4 import BeautifulSoup
 import requests
-from summarize import get_summary
+from features.summarize import get_summary
+from nltk.stem import WordNetLemmatizer
+
+# Lemmatizer setup
+lemmatizer = WordNetLemmatizer()
 
 # TO BUILD : Function to clean up the search sentence into keywords
 def cleanup_search_sentence(search_sentence : str) -> str :
@@ -19,12 +23,13 @@ def cleanup_search_sentence(search_sentence : str) -> str :
     to_ignore.remove('history')
     
     # Cleaning up the search sentence
-    search_sentence = [word.lower() for word in search_sentence.split() if word.lower() not in to_ignore]
+    search_sentence = [lemmatizer.lemmatize(word.lower()) for word in search_sentence.split() if word.lower() not in to_ignore]
     return " ".join(search_sentence)
 
 # Function finding most relevant webpage url based on keywords
 def get_url(search_sentence : str, domain = None) :
     keywords_split = cleanup_search_sentence(search_sentence).lower().split()
+    # print(keywords_split)
     search_query = "+".join(keywords_split)
     
     # Adds website name to search query if domain_restriction is given
@@ -32,6 +37,7 @@ def get_url(search_sentence : str, domain = None) :
         search_query += f'+{domain}'
     
     url = f"https://www.google.com/search?q={search_query}"
+    # print(url)
     
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -52,7 +58,7 @@ def get_url(search_sentence : str, domain = None) :
                     if domain :
                         if domain.lower() in link.lower() :
                             count = sum(1 for keyword in keywords_split if keyword.lower() in link.lower())
-                            if count >= 3 :
+                            if count >= 1 :
                                 links.append(link)
                     else :
                         count = sum(1 for keyword in keywords_split if keyword.lower() in link.lower())
@@ -94,3 +100,5 @@ def summarize_from_web(search_sentence : str, domain=None) :
     text = get_text(url)
     summary = get_summary(text)
     return summary
+
+# print(get_url('Can you tell about gravitational forces of blackholes', domain='wikipedia'))
