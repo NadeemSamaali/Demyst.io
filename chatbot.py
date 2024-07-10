@@ -9,6 +9,8 @@ import numpy as np
 from features.linspace.arithmetics import parse_and_evaluate
 import re
 
+import features.web_pull as wp
+
 # Nltk setup
 import nltk
 #nltk.download('punkt', quiet = True)
@@ -89,6 +91,13 @@ def run_chatbot(user_input : str) :
         expression = "".join(matches)
         result = parse_and_evaluate(expression)
         return f'> {get_response(tag)} The result of {expression} is {result} !'
+    
+    elif intent == 'internet_search' :
+        print(f'> {get_response(tag)}')
+        url = wp.get_url(user_input)
+        summary = wp.summarize_from_web(user_input, domain='wikipedia')
+        return f'> Here is a short summary of what I was able to find on the web ! \n{'='*10} \n {summary} \n~ Source : {url} \n{'='*10} '
+    
     # Other interactions with chatbot
     else :
         response = get_response(tag)
