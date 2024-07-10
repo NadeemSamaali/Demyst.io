@@ -2,6 +2,10 @@ import os
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1' 
 
+# Print load message
+print('Loading packages. This may take a few seconds ...')
+
+
 import random
 import json
 import pickle
@@ -32,7 +36,6 @@ words = pickle.load(open('assets/words.pkl', 'rb'))
 classes = pickle.load(open('assets/classes.pkl', 'rb'))
 
 # Loading model
-print(':: Loading the chatbot model ::')
 model = load_model('assets/chatbot_model.h5', compile = False)
 
 # Function to clean up sentences
@@ -94,9 +97,9 @@ def run_chatbot(user_input : str) :
     
     elif intent == 'internet_search' :
         print(f'> {get_response(tag)}')
-        url = wp.get_url(user_input)
+        url = wp.get_url(user_input, domain='wikipedia')
         summary = wp.summarize_from_web(user_input, domain='wikipedia')
-        return f'> Here is a short summary of what I was able to find on the web ! \n{'='*10} \n {summary} \n~ Source : {url} \n{'='*10} '
+        return f'> Here is a short summary of what I was able to find on the web ! \n> {summary} \n> Source : {url} '
     
     # Other interactions with chatbot
     else :
