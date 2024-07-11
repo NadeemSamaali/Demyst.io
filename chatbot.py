@@ -5,7 +5,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 # Print load message
 print('Loading packages. This may take a few seconds ...')
 
-
 import random
 import json
 import pickle
