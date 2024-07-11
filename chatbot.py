@@ -31,11 +31,11 @@ with open('assets/intents.json') as file :
     intents = json.load(file)
     
 # Loading pickle files
-words = pickle.load(open('assets/words.pkl', 'rb'))
-classes = pickle.load(open('assets/classes.pkl', 'rb'))
+words = pickle.load(open('assets/chatbot/words.pkl', 'rb'))
+classes = pickle.load(open('assets/chatbot/classes.pkl', 'rb'))
 
 # Loading model
-model = load_model('assets/chatbot_model.h5', compile = False)
+model = load_model('assets/chatbot/chatbot_model.h5', compile = False)
 
 # Function to clean up sentences
 def clean_up_sentence(sentence) :
