@@ -1,0 +1,174 @@
+{
+    "intents": [
+        {
+            "tag": "greetings",
+            "patterns": [
+                "hi",
+                "hey",
+                "hello",
+                "good day",
+                "good morning",
+                "howdy",
+                "what's up",
+                "greetings",
+                "how are you doing",
+                "Good to see you",
+                "Hi there",
+                "Hello there",
+                "Hey there",
+                "How's it going ?",
+                "What's new?",
+                "How are you?"
+            ],
+            "responses": [
+                "Hi !",
+                "Hello !",
+                "Hey there! How can I assist you today ?",
+                "Good day! What can I do for you ?",
+                "Hello! How are you ?",
+                "Hi! How's it going ?",
+                "Hey! How can I help ?"
+            ]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": [
+                "bye",
+                "goodbye",
+                "cya",
+                "gotta go",
+                "see you",
+                "imma go",
+                "peace out",
+                "i'm out",
+                "see you later",
+                "later",
+                "see you later alligator",
+                "take care",
+                "catch you later",
+                "farewell"
+            ],
+            "responses": [
+                "Goodbye !",
+                "Thanks for reaching out !",
+                "Have a nice day !",
+                "See you again soon !",
+                "Take care !",
+                "Catch you later !",
+                "Farewell !"
+            ]
+        },
+        {
+            "tag": "thanks",
+            "patterns": [
+                "Thanks",
+                "Thank you",
+                "This helps a lot !",
+                "I'm grateful for your help",
+                "You are so helpful",
+                "All my gratitude",
+                "I appreciate it",
+                "Thanks a ton",
+                "Thank you so much",
+                "Thanks a lot"
+            ],
+            "responses": [
+                "You're welcome !",
+                "Let me know if you need anything else !",
+                "Happy to help !",
+                "Anytime !",
+                "Glad I could assist !"
+            ]
+        },
+        {
+            "tag": "self-identity",
+            "patterns": [
+                "Who are you ?", 
+                "What's your name ", 
+                "What are you ?", 
+                "How can you help me ?", 
+                "What's your identity ?", 
+                "What do you do ?",
+                "Can you introduce yourself ?",
+                "Tell me about yourself",
+                "Who am I speaking with ?"
+            ],
+            "responses": [
+                "My name is Demystio. I'm an AI chatbot assistant for students !",
+                "My name is Demystio. I can help you organize your student life or answer questions !",
+                "I'm Demystio. I can help make your student workload more manageable.",
+                "I'm Demystio, your AI assistant here to help with your studies !"
+            ]
+        },
+        {
+            "tag": "help",
+            "patterns": [
+                "I don't know how to do this",
+                "What should I do ?",
+                "What can you do ?",
+                "I need help",
+                "How can you help me ?",
+                "What are your functionalities ?",
+                "What are your features ?",
+                "Where do I start ?",
+                "Can you assist me ?",
+                "Can you help ?",
+                "I need assistance"
+            ],
+            "responses": [
+                "Here's a list of things I can do to get you started :",
+                "Here's how I can help you :",
+                "I can assist you with a variety of tasks. Here are some options :",
+                "These are some ways I can help you :",
+                "Let's see how I can assist you today :"
+            ]
+        },
+        {
+            "tag": "arithmetics",
+            "patterns": [
+                "What is equal to ?",
+                "What's the result of ?",
+                "What does output ?",
+                "Can you calculate ?",
+                "Find the answer to this expression",
+                "Solve the following equations",
+                "Can you solve this ?",
+                "What is the answer to ?",
+                "Calculate the result of"
+            ],
+            "responses": [
+                "Here's the result of your expression !",
+                "I can gladly calculate that !",
+                "Here you go !",
+                "The answer is :",
+                "Let me calculate that for you :",
+                "Here's the solution :"
+            ]
+        },
+        {
+            "tag": "internet_search",
+            "patterns": [
+                "Can you tell me about ?",
+                "Can you find this information for me ?",
+                "What is the history of ?",
+                "How does work ?",
+                "Talk to me about",
+                "Can you look up ?",
+                "Do you know about ?",
+                "Tell me more about",
+                "Give me information on",
+                "What's the story behind"
+            ],
+            "responses": [
+                "Hmm... Let me think about that !",
+                "Let me do a bit of research, I'll get back to you !",
+                "That's an interesting question ! Let me think...",
+                "I see what you mean ! I'll look it up quickly...",
+                "Good question ! I'll get back to you shortly...",
+                "Let me find that information for you.",
+                "I'll look it up and let you know.",
+                "Give me a moment to check that out for you."
+            ]
+        }
+    ]
+}
