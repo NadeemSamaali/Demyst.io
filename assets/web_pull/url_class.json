@@ -1,0 +1,15 @@
+{
+    "academic" : [
+        "wikipedia",
+        "open.edu",
+        "khanacademy"
+    ],
+    "forum" : [
+        "reddit",
+        "quora"
+    ],
+    "video" : [
+        "youtube"
+    ]
+
+}

@@ -27,7 +27,7 @@ from keras.src.saving.saving_api import load_model
 lemmatizer = WordNetLemmatizer()
 
 # Loading intents json file
-with open('assets/intents.json') as file :
+with open('assets/chatbot/intents.json') as file :
     intents = json.load(file)
     
 # Loading pickle files
@@ -96,9 +96,9 @@ def run_chatbot(user_input : str) :
     
     elif intent == 'internet_search' :
         print(f'> {get_response(tag)}')
-        url = wp.get_url(user_input, domain='wikipedia')
-        summary = wp.summarize_from_web(user_input, domain='wikipedia')
-        return f'> Here is a short summary of what I was able to find on the web ! \n> {summary} \n> Source : {url} '
+        url = wp.get_url_list(user_input, url_class='academic')
+        summary = wp.summarize_from_web(user_input, url_class='academic')
+        return f'> Here is a short summary of what I was able to find on the web ! \n> {summary} \n> Source : {url[0]} '
     
     # Other interactions with chatbot
     else :

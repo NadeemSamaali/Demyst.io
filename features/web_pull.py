@@ -4,13 +4,17 @@ import requests
 from features.summarize import get_summary
 from nltk.stem import WordNetLemmatizer
 
+# Retrieving url_class.json data into dictionary
+with open('assets/web_pull/url_class.json') as file :
+    url_list = json.load(file) 
+
 # Lemmatizer setup
 lemmatizer = WordNetLemmatizer()
 
 # TO BUILD : Function to clean up the search sentence into keywords
 def cleanup_search_sentence(search_sentence : str) -> str :
     # Loading the intents json file into a dictionary
-    with open('assets/intents.json') as file :
+    with open('assets/chatbot/intents.json') as file :
         intents = json.load(file)
         
     # Extracting non-useful words in search sentence based on the intents pattern
@@ -27,22 +31,22 @@ def cleanup_search_sentence(search_sentence : str) -> str :
     return " ".join(search_sentence)
 
 # Function finding most relevant webpage url based on keywords
-def get_url(search_sentence : str, domain = None) :
+def get_url_list(search_sentence : str, url_class = None) :
+    
     keywords_split = cleanup_search_sentence(search_sentence).lower().split()
     # print(keywords_split)
     search_query = "+".join(keywords_split)
     
     # Adds website name to search query if domain_restriction is given
-    if domain :
-        search_query += f'+{domain}'
+    if url_class in url_list.keys() :
+        for domain in url_list[url_class] :
+            search_query += f'+{domain}'
     
     url = f"https://www.google.com/search?q={search_query}"
-    # print(url)
     
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     }
-
     # Send a GET request to Google
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
@@ -52,21 +56,27 @@ def get_url(search_sentence : str, domain = None) :
         for result in search_results:
             link = result.get("href")
             # Ignore google account webpages and links containing the keyword video
-            if link == None or link.startswith("https://accounts.google.com/") or "video" in link.lower() or "scholar.google" in link.lower():
+            if link == None or "google" in link.lower() :
                 continue
             elif link.startswith("https://") :
-                    if domain :
-                        if domain.lower() in link.lower() :
-                            count = sum(1 for keyword in keywords_split if keyword.lower() in link.lower())
-                            if count >= 1 :
-                                links.append(link)
-                    else :
-                        count = sum(1 for keyword in keywords_split if keyword.lower() in link.lower())
-                        if count >= 2 :
-                            links.append(link)
-        return links[0] if len(links) != 0 else None
+                # relevancy = sum(1 for keyword in keywords_split if keyword in link.lower())
+                # if relevancy >= 2 or url_class == "video":
+                links.append(link)
+        return links
     else:
         print(f"Failed to retrieve Google search results. Status code: {response.status_code}")
+        
+# Function isolating domain link from a URL
+def isolate_domain_url(url : str) -> str :
+    domain_output = ''
+    counter = 0
+    for i in range(len(url)) :
+        if url[i] == '/' :
+            counter += 1
+        domain_output += url[i]
+        if counter == 3 or i == len(url)-1 :
+            return domain_output
+            break
     
 # Function to extract bodies of text from url
 def get_text(url : str) -> str :
@@ -95,10 +105,14 @@ def get_text(url : str) -> str :
     return " ".join(p_output)
 
 # Function outputing summary of webpage based on search sentence
-def summarize_from_web(search_sentence : str, domain=None) :
-    url = get_url(search_sentence, domain)
-    text = get_text(url)
-    summary = get_summary(text)
-    return summary
+def summarize_from_web(search_sentence : str, url_class=None) :
+    url = get_url_list(search_sentence, url_class)
+    
+    if "khanacademy" in isolate_domain_url(url[0]) :
+        return "Here's a webpage I found on Khan Academy which can help answer your question !"
+    else :
+        text = get_text(url[0])
+        summary = get_summary(text)
+        return summary
 
 # print(get_url('Can you tell about gravitational forces of blackholes', domain='wikipedia'))
