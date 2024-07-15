@@ -36,15 +36,15 @@ from keras.src.saving.saving_api import load_model
 lemmatizer = WordNetLemmatizer()
 
 # Loading intents json file
-with open('assets/chatbot/intents.json') as file:
+with open(os.path.join(os.path.dirname(__file__), '../../assets/chatbot/intents.json')) as file:
     intents = json.load(file)
     
 # Loading pickle files
-words = pickle.load(open('assets/chatbot/words.pkl', 'rb'))
-classes = pickle.load(open('assets/chatbot/classes.pkl', 'rb'))
+words = pickle.load(open(os.path.join(os.path.dirname(__file__), '../../assets/chatbot/words.pkl'), 'rb'))
+classes = pickle.load(open(os.path.join(os.path.dirname(__file__), '../../assets/chatbot/classes.pkl'), 'rb'))
 
 # Loading model
-model = load_model('assets/chatbot/chatbot_model.h5', compile=False)
+model = load_model(os.path.join(os.path.dirname(__file__), '../../assets/chatbot/chatbot_model.h5'), compile=False)
 
 # Function to clean up sentences
 def clean_up_sentence(sentence):
