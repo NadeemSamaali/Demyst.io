@@ -1,3 +1,4 @@
 env/
-linspace/__pycache__/
+features/linspace/__pycache__/
+features/chatbot/__pycache__/
 features/__pycache__/
