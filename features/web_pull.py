@@ -5,8 +5,8 @@ import requests
 from features.summarize import get_summary
 from nltk.stem import WordNetLemmatizer
 
-with open(os.path.join(os.path.dirname(__file__), '../assets/chatbot/intents.json')) as file:
-    intents = json.load(file)
+with open(os.path.join(os.path.dirname(__file__), '../assets/web_pull/url_class.json')) as file:
+    url_list = json.load(file)
 
 # Lemmatizer setup
 lemmatizer = WordNetLemmatizer()
