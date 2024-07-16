@@ -14,7 +14,7 @@ lemmatizer = WordNetLemmatizer()
 # TO BUILD : Function to clean up the search sentence into keywords
 def cleanup_search_sentence(search_sentence : str) -> str :
     # Loading the intents json file into a dictionary
-    with open('assets/chatbot/intents.json') as file :
+    with open(os.path.join(os.path.dirname(__file__), '../assets/chatbot/intents.json')) as file :
         intents = json.load(file)
         
     # Extracting non-useful words in search sentence based on the intents pattern
