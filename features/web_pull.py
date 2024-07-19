@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 from features.summarize import get_summary
 from nltk.stem import WordNetLemmatizer
+import wikipedia
 
 with open(os.path.join(os.path.dirname(__file__), '../assets/web_pull/url_class.json')) as file:
     url_list = json.load(file)
@@ -59,10 +60,11 @@ def get_url_list(search_sentence : str, url_class = None) :
             if link == None or "google" in link.lower() :
                 continue
             elif link.startswith("https://") :
-                # relevancy = sum(1 for keyword in keywords_split if keyword in link.lower())
-                # if relevancy >= 2 or url_class == "video":
-                links.append(link)
-        return links
+                relevancy = sum(1 for keyword in keywords_split if keyword in link.lower())
+                #if relevancy >= 2 or url_class == "video":
+                links.append((relevancy, link))
+        sorted_links = sorted(links, key=lambda x: x[0], reverse=True)
+        return sorted_links
     else:
         print(f"Failed to retrieve Google search results. Status code: {response.status_code}")
         
@@ -107,11 +109,14 @@ def get_text(url : str) -> str :
 # Function outputing summary of webpage based on search sentence
 def summarize_from_web(search_sentence : str, url_class=None) :
     url = get_url_list(search_sentence, url_class)
-    
-    if "khanacademy" in isolate_domain_url(url[0]) :
+    if "khanacademy" in url[0][1] :
         return "Here's a webpage I found on Khan Academy which can help answer your question !"
+    elif "wikipedia" in url[0][1] :
+        article_title = url[0][1].split('/')[-1]
+        summary = wikipedia.summary(article_title)
+        return summary
     else :
-        text = get_text(url[0])
+        text = get_text(url[0][1])
         summary = get_summary(text)
         return summary
 
