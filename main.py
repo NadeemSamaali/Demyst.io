@@ -20,8 +20,8 @@ import random
 import json
 import pickle
 import numpy as np
-from features.linspace import arithmetics as ln
-import features.web_pull as wp
+from modules.linspace import arithmetics as ln
+import modules.web_pull as wp
 
 # Nltk setup
 import nltk

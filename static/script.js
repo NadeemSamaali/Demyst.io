@@ -75,7 +75,7 @@ const showTypingAnimation = () => {
     // Display the typing animation and call the getChatResponse function
     const html = `<div class="chat-content">
                     <div class="chat-details">
-                        <img src="assets/web_app/images/chatbot_icon.png" alt="chatbot-img">
+                        <img src="static/images/chatbot_icon.png" alt="chatbot-img">
                         <div class="typing-animation">
                             <div class="typing-dot" style="--delay: 0.2s"></div>
                             <div class="typing-dot" style="--delay: 0.3s"></div>
@@ -101,7 +101,7 @@ const handleOutgoingChat = () => {
 
     const html = `<div class="chat-content">
                     <div class="chat-details">
-                        <img src="assets/web_app/images/user_icon.png" alt="user-img">
+                        <img src="static/images/user_icon.png" alt="user-img">
                         <p>${userText}</p>
                     </div>
                 </div>`;
