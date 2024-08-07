@@ -4,7 +4,7 @@ import sys
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 # Set up Flask and enable CORS
 app = Flask(__name__)
@@ -36,15 +36,16 @@ from keras.src.saving.saving_api import load_model
 lemmatizer = WordNetLemmatizer()
 
 # Loading intents json file
-with open(os.path.join(os.path.dirname(__file__), '../../assets/chatbot/intents.json')) as file:
+#with open(os.path.join(os.path.dirname(__file__), '../../assets/chatbot/intents.json')) as file:
+with open('assets/chatbot/intents.json') as file :
     intents = json.load(file)
     
 # Loading pickle files
-words = pickle.load(open(os.path.join(os.path.dirname(__file__), '../../assets/chatbot/words.pkl'), 'rb'))
-classes = pickle.load(open(os.path.join(os.path.dirname(__file__), '../../assets/chatbot/classes.pkl'), 'rb'))
+words = pickle.load(open(os.path.join(os.path.dirname(__file__), 'assets/chatbot/words.pkl'), 'rb'))
+classes = pickle.load(open(os.path.join(os.path.dirname(__file__), 'assets/chatbot/classes.pkl'), 'rb'))
 
 # Loading model
-model = load_model(os.path.join(os.path.dirname(__file__), '../../assets/chatbot/chatbot_model.h5'), compile=False)
+model = load_model(os.path.join(os.path.dirname(__file__), 'assets/chatbot/chatbot_model.h5'), compile=False)
 
 # Function to clean up sentences
 def clean_up_sentence(sentence):
@@ -113,7 +114,7 @@ def run_chatbot(user_input: str):
         response = get_response(tag)
         return f"{response}"
 
-@app.route('/chatbot', methods=['POST'])
+@app.route('/main', methods=['POST'])
 def chatbot():
     data = request.json
     user_input = data.get("message")

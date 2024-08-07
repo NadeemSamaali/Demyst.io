@@ -32,7 +32,7 @@ const createChatElement = (content, className) => {
 }
 
 const getChatResponse = async (incomingChatDiv) => {
-    const API_URL = "http://localhost:5000/chatbot";  // URL of the Flask server
+    const API_URL = "http://localhost:5000/main";  // URL of the Flask server
     const pElement = document.createElement("p");
 
     // Define the properties and data for the API request
@@ -75,7 +75,7 @@ const showTypingAnimation = () => {
     // Display the typing animation and call the getChatResponse function
     const html = `<div class="chat-content">
                     <div class="chat-details">
-                        <img src="static/images/chatbot_icon.png" alt="chatbot-img">
+                        <img src="images/chatbot_icon.png" alt="chatbot-img">
                         <div class="typing-animation">
                             <div class="typing-dot" style="--delay: 0.2s"></div>
                             <div class="typing-dot" style="--delay: 0.3s"></div>
@@ -101,7 +101,7 @@ const handleOutgoingChat = () => {
 
     const html = `<div class="chat-content">
                     <div class="chat-details">
-                        <img src="static/images/user_icon.png" alt="user-img">
+                        <img src="images/user_icon.png" alt="user-img">
                         <p>${userText}</p>
                     </div>
                 </div>`;

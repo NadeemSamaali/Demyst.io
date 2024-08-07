@@ -2,7 +2,7 @@ import os
 import json
 from bs4 import BeautifulSoup
 import requests
-from features.summarize import get_summary
+from modules.summarize import get_summary
 from nltk.stem import WordNetLemmatizer
 import wikipedia
 
