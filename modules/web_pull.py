@@ -112,9 +112,10 @@ def summarize_from_web(search_sentence : str, url_class=None) :
     if "khanacademy" in url[0][1] :
         return "Here's a webpage I found on Khan Academy which can help answer your question !"
     elif "wikipedia" in url[0][1] :
-        article_title = url[0][1].split('/')[-1]
+        article_title = f"'{url[0][1].split('/')[-1]}'"
+        print(url[0][1], article_title)
         summary = wikipedia.summary(article_title)
-        return summary
+        return '\n\n'.join(summary.split('\n'))
     else :
         text = get_text(url[0][1])
         summary = get_summary(text)

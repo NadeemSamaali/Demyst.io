@@ -1,7 +1,6 @@
 env/
-
+.vscode/
 modules/linspace/__pycache__/
-
 modules/__pycache__/
-
 __pycache__/
+/test.py 
