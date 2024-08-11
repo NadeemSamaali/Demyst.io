@@ -107,7 +107,7 @@ def run_chatbot(user_input: str):
         print(f'> {get_response(tag)}')
         url = wp.get_url_list(user_input, url_class='academic')
         summary = wp.summarize_from_web(user_input, url_class='academic')
-        return f'{summary} \n\n {url[0][1]} '
+        return f'{summary} \n\n{url[0][1]} '
     
     # Other interactions with chatbot
     else:
