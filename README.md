@@ -19,21 +19,20 @@ The currently supported features are :
 More features are currently under development
 
 ## Setup
-1. Make sure to have a stable internet connection
-2. Clone the repository
+1. Clone the repository
 ~~~bat
 git clone https://github.com/NadeemSamaali/Demyst.io
 cd Demyst.io
 ~~~
 
-3. Install the necessary dependencies
+2. Install the necessary dependencies
 ~~~bat
 call configure.bat
 ~~~
 
-4. Launch the web application
+3. Launch the web application
 ~~~bat
 call run.bat
 ~~~
 
-To run future instances of Demyst.io, only execute step 4.
+To run future instances of Demyst.io, only execute step 3.
