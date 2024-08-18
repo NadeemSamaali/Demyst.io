@@ -1,5 +1,6 @@
 import os
 import json
+import re
 from bs4 import BeautifulSoup
 import requests
 from modules.summarize import get_summary
@@ -103,8 +104,9 @@ def get_text(url : str) -> str :
     
     paragraphs = soup.find_all('p')
     for p in paragraphs:
-        p_output.append(p.get_text())
-    return " ".join(p_output)
+        p_output.extend(re.sub(r'\[\d+\]', '', p.get_text()))
+    
+    return "".join(p_output)
 
 # Function outputing summary of webpage based on search sentence
 def summarize_from_web(search_sentence : str, url_class=None) :
