@@ -25,9 +25,9 @@ import modules.web_pull as wp
 
 # Nltk setup
 import nltk
-# nltk.download('punkt', quiet=True)
+nltk.download('punkt', quiet=True)
 from nltk.stem import WordNetLemmatizer
-# nltk.download('wordnet', quiet=True)
+nltk.download('wordnet', quiet=True)
 
 # Keras setup
 from keras.src.saving.saving_api import load_model
